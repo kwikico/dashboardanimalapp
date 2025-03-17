@@ -1,0 +1,122 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./src/components/LineageTree.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+/* LineageTree.css */
+.lineage-tree-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Node styling */
+.rd3t-node {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rd3t-node:hover circle {
+  filter: brightness(1.1);
+  transform: scale(1.1);
+}
+
+/* Link styling */
+.rd3t-link {
+  transition: stroke-width 0.3s ease;
+}
+
+.rd3t-link:hover {
+  stroke-width: 2.5px;
+}
+
+/* Male links */
+.paternal-link {
+  stroke: #3b82f6;
+}
+
+/* Female links */
+.maternal-link {
+  stroke: #ec4899;
+}
+
+/* Champion node highlight */
+.champion-node circle {
+  stroke: #fbbf24;
+  stroke-width: 2px;
+}
+
+/* Selected node styling */
+.selected-node circle {
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+}
+
+/* Node text styling */
+.node-text {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  pointer-events: none;
+}
+
+/* Details panel animation */
+.details-panel {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Zoom controls */
+.zoom-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.zoom-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.zoom-button:hover {
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Tooltip styling */
+.node-tooltip {
+  position: absolute;
+  background-color: white;
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 20;
+  max-width: 200px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.node-tooltip.visible {
+  opacity: 1;
+} 

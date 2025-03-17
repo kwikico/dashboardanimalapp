@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import { FiHome, FiUsers, FiHeart, FiAward, FiLayers, FiSettings, FiLogOut } from 'react-icons/fi';
+import { FaTree } from 'react-icons/fa';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -8,12 +9,13 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const navItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: FiHome },
-    { name: 'Dogs', href: '/dashboard/dogs', icon: FiUsers },
-    { name: 'Health Records', href: '/dashboard/health', icon: FiHeart },
-    { name: 'Achievements', href: '/dashboard/achievements', icon: FiAward },
-    { name: 'Litters', href: '/dashboard/litters', icon: FiLayers },
-    { name: 'Settings', href: '/dashboard/settings', icon: FiSettings },
+    { name: 'Dashboard', href: '/dashboard', icon: FiHome, emoji: '🏠' },
+    { name: 'Dogs', href: '/dashboard/dogs', icon: FiUsers, emoji: '🐕' },
+    { name: 'Lineage Tree', href: '/dashboard/lineage', icon: FaTree, emoji: '🌳' },
+    { name: 'Health Records', href: '/dashboard/health', icon: FiHeart, emoji: '❤️' },
+    { name: 'Achievements', href: '/dashboard/achievements', icon: FiAward, emoji: '🏆' },
+    { name: 'Litters', href: '/dashboard/litters', icon: FiLayers, emoji: '🐾' },
+    { name: 'Settings', href: '/dashboard/settings', icon: FiSettings, emoji: '⚙️' },
   ];
 
   return (
@@ -23,7 +25,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
         <div className="flex flex-col h-full">
           <div className="flex items-center h-16 px-6 border-b border-gray-200">
             <Link href="/dashboard" className="text-xl font-bold text-blue-600">
-              Dog Breeder
+              🐶 Dog Breeder
             </Link>
           </div>
           <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
@@ -33,14 +35,16 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
                 href={item.href}
                 className="flex items-center px-2 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100"
               >
-                <item.icon className="w-5 h-5 mr-3 text-gray-500" />
+                <item.icon className="w-5 h-5 mr-2 text-gray-500" />
+                <span className="mr-2">{item.emoji}</span>
                 {item.name}
               </Link>
             ))}
           </nav>
           <div className="p-4 border-t border-gray-200">
             <button className="flex items-center w-full px-2 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100">
-              <FiLogOut className="w-5 h-5 mr-3 text-gray-500" />
+              <FiLogOut className="w-5 h-5 mr-2 text-gray-500" />
+              <span className="mr-2">👋</span>
               Logout
             </button>
           </div>
@@ -50,7 +54,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
       {/* Mobile header */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-10 flex items-center h-16 px-4 bg-white border-b border-gray-200">
         <Link href="/dashboard" className="text-xl font-bold text-blue-600">
-          Dog Breeder
+          🐶 Dog Breeder
         </Link>
       </div>
 

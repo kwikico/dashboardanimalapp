@@ -1,0 +1,10 @@
+{
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/dogs/page": "app/dashboard/dogs/page.js",
+  "/dashboard/settings/page": "app/dashboard/settings/page.js",
+  "/dashboard/dogs/add/page": "app/dashboard/dogs/add/page.js",
+  "/dashboard/achievements/[id]/page": "app/dashboard/achievements/[id]/page.js",
+  "/dashboard/achievements/page": "app/dashboard/achievements/page.js",
+  "/dashboard/health/page": "app/dashboard/health/page.js",
+  "/dashboard/lineage/page": "app/dashboard/lineage/page.js"
+}

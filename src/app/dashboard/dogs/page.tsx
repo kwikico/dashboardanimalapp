@@ -16,6 +16,7 @@ export default function DogsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [genderFilter, setGenderFilter] = useState<string | null>(null);
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
   
   // Filter dogs based on search term and filters
   const filteredDogs = useMemo(() => {
@@ -44,9 +45,10 @@ export default function DogsPage() {
     <DashboardLayout>
       <PageHeader title="Dogs" description="Manage your dogs" />
       
-      <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-          <div className="relative">
+      <div className="mb-6 flex flex-col gap-4">
+        {/* Search and Add Button Row */}
+        <div className="flex flex-col sm:flex-row justify-between gap-4">
+          <div className="relative w-full sm:max-w-xs">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
               <FiSearch size={18} />
             </div>
@@ -59,40 +61,57 @@ export default function DogsPage() {
             />
           </div>
           
-          <div className="flex gap-2">
-            <FilterSelect
-              options={[
-                { label: 'All Status', value: null },
-                { label: 'Active', value: 'Active' },
-                { label: 'Breeding', value: 'Breeding' },
-                { label: 'Retired', value: 'Retired' },
-              ]}
-              value={statusFilter}
-              onChange={setStatusFilter}
-            />
+          <div className="flex gap-2 justify-between sm:justify-end w-full">
+            <Button 
+              variant="outline" 
+              onClick={() => setFiltersExpanded(!filtersExpanded)}
+              className="sm:hidden"
+            >
+              <FiFilter className="mr-2" />
+              Filters
+            </Button>
             
-            <FilterSelect
-              options={[
-                { label: 'All Gender', value: null },
-                { label: 'Male', value: 'Male' },
-                { label: 'Female', value: 'Female' },
-              ]}
-              value={genderFilter}
-              onChange={setGenderFilter}
-            />
+            <Button onClick={() => router.push('/dashboard/dogs/add')}>
+              <FiPlus className="mr-2" />
+              Add Dog
+            </Button>
           </div>
         </div>
         
-        <Button onClick={() => router.push('/dashboard/dogs/add')}>
-          <FiPlus className="mr-2" />
-          Add Dog
-        </Button>
+        {/* Filters - Always visible on desktop, toggleable on mobile */}
+        <div className={`flex flex-wrap gap-2 ${filtersExpanded ? 'flex' : 'hidden sm:flex'}`}>
+          <FilterSelect
+            options={[
+              { label: 'All Status', value: null },
+              { label: 'Active', value: 'Active' },
+              { label: 'Breeding', value: 'Breeding' },
+              { label: 'Retired', value: 'Retired' },
+            ]}
+            value={statusFilter}
+            onChange={setStatusFilter}
+          />
+          
+          <FilterSelect
+            options={[
+              { label: 'All Gender', value: null },
+              { label: 'Male', value: 'Male' },
+              { label: 'Female', value: 'Female' },
+            ]}
+            value={genderFilter}
+            onChange={setGenderFilter}
+          />
+        </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filteredDogs.map(dog => (
           <DogCard key={dog.id} dog={dog} />
         ))}
+        {filteredDogs.length === 0 && (
+          <div className="col-span-full py-12 text-center text-gray-500">
+            No dogs found matching your filters.
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
@@ -118,7 +137,7 @@ function FilterSelect({
       value={value || ''}
       onChange={(e) => onChange(e.target.value === '' ? null : e.target.value)}
     >
-      {options.map((option) => (
+      {options.map(option => (
         <option key={option.label} value={option.value || ''}>
           {option.label}
         </option>
